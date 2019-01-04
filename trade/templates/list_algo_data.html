@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Saved algos{% endblock %}
+{% block content %}
+    <h1>Saved algo</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Avg. PnL
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in object_list %}
+                <tr>
+                    <td>
+                        <a href="{% url 'trade:algo_detail' obj.pk %}">
+                            {{ obj.name }}
+                        </a>
+                    </td>
+                    <td>
+                        {{ obj.avg_pnl }}
+                    </td>
+                </tr>
+             {% empty %}
+                <tr>
+                    <td colspan="2">
+                        No algos yet
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

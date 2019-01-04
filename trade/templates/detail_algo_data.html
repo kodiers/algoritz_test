@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Data for {{ object.name }}{% endblock %}
+{% block content %}
+        <h1>{{ object.name }}!</h1>
+
+        <canvas id="algoChart" width="500" height="400"></canvas>
+{% endblock %}
+{% block body_scripts %}
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript">
+            $.get('{% url "trade:algo_chart" object.pk %}', function(data) {
+                var ctx = $("#algoChart").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: 'line', data: data
+                });
+            });
+        </script>
+{% endblock %}

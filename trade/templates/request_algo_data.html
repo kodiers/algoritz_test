@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Request data{% endblock %}
+{% block content %}
+    <h1>Request algo</h1>
+    <form action="." method="post">
+        {% csrf_token %}
+        {{ form| crispy }}
+        <button type="submit" class="btn btn-primary">Request data</button>
+    </form>
+    <p class="text-center">
+        <a href="{% url 'trade:algos_list' %}" class="btn btn-success">View all algos</a>
+    </p>
+{% endblock %}
